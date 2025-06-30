@@ -1,6 +1,5 @@
-import logo from './logo.svg';      // 이미지 파일 import 변수명 logo 로 지정.
-import './App.css';
-
+import logo from "./logo.svg"; // 이미지 파일 import 변수명 logo 로 지정.
+import "./App.css";
 
 // Day1_01 : JSX 문법 맛보기
 function App() {
