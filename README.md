@@ -101,11 +101,11 @@ React 프로젝트를 빠르게 생성해주는 CLI 툴
         C:\class250616\React>npx create-vite@latest lesson02 --template react
         C:\class250616\React>cd lesson02
         - 패키지 설치
-        C:\class250616\React\lesson01>npm install
+        C:\class250616\React\lesson02>npm install
         - 개발 모드로 실행 -
-        C:\class250616\React\lesson01>npm run dev
+        C:\class250616\React\lesson02>npm run dev
         - 빌드(배포)-
-        C:\class250616\React\lesson01>npm run build
+        C:\class250616\React\lesson02>npm run build
 
 ### 5. 번들 bundle
 
