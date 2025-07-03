@@ -1,10 +1,26 @@
+// Day3_01 : 배열이 state 변수일 떄,
+//           상태값 변경 함수 테스트
+// 여기에서 사용한 JS 문법 테스트 : public/es6test 폴더 참고
+
 import { useEffect, useRef, useState } from 'react'
 
 export default function ArrayTest() {
   const initVal = [
-    { id: 1, text: '리액트 수업 목습', checked: true },
-    { id: 2, text: '리액트 프로젝트 기획', checked: false },
-    { id: 3, text: '데이터 베이스 테스트', checked: true }
+    {
+      id: 1,
+      text: '리액트 수업 복습',
+      checked: true
+    },
+    {
+      id: 2,
+      text: '리액트 프로젝트 기획',
+      checked: false
+    },
+    {
+      id: 3,
+      text: '데이터베이스 테스트',
+      checked: true
+    }
   ]
   const [todos, setTodos] = useState(initVal)
   const maxid = useRef(todos.length + 1)

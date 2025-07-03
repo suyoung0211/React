@@ -1,3 +1,6 @@
+// Day3_02 : 배열 상태값 변경을 UI로 구현
+// Day3_03 : components 폴더에 컴포넌트로 만들어서 리팩토링
+
 import { useRef, useState } from 'react'
 import './assets/css/TodoInsert.scss'
 import './assets/css/TodoList.scss'
@@ -13,11 +16,26 @@ import {
 // 추가 패키지 설치 명령어 : npm i sass react-icons
 
 function App() {
+  const renderCount = useRef(0) // useRef 는 리액트 함수(훅)
+  renderCount.current += 1
+
   // 할일 목록 배열
   const initVal = [
-    { id: 1, text: '리액트 수업 복습', checked: true },
-    { id: 2, text: '리액트 프로젝트 기획', checked: false },
-    { id: 3, text: '데이터베이스 테스트', checked: true }
+    {
+      id: 1,
+      text: '리액트 수업 복습',
+      checked: true
+    },
+    {
+      id: 2,
+      text: '리액트 프로젝트 기획',
+      checked: false
+    },
+    {
+      id: 3,
+      text: '데이터베이스 테스트',
+      checked: true
+    }
   ]
   const [todos, setTodos] = useState(initVal)
   const maxid = useRef(todos.length + 1)
@@ -88,7 +106,7 @@ function App() {
         <div className='content'>
           {/* {children} */}
 
-          {/* insert */}
+          {/* TodoInsert.jsx */}
           <form className='TodoInsert' onSubmit={handleSubmit}>
             <input
               placeholder='할 일을 입력하세요.'
@@ -102,11 +120,12 @@ function App() {
             </button>
           </form>
 
-          {/* List */}
+          {/* TodoList.jsx */}
           <div className='TodoList'>
             {/* ListItem을 반복해서 표시 */}
             {/* 항목 삭제 아이콘 TodoListItem 컴포넌트에 있음. */}
             {todos.map((item, idx) => (
+              // TodoListItem.jsx
               <div className='TodoListItem' key={idx}>
                 <div
                   className={`checkbox ${item.checked ? 'checked' : ''}`}
@@ -127,6 +146,7 @@ function App() {
           </div>
         </div>
       </div>
+      <div> 렌더링 카운트 : {renderCount.current}</div>
     </div>
   )
 }
