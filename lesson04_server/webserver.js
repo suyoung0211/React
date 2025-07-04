@@ -31,6 +31,11 @@ MongoClient.connect(MONGODB_URI)
   })
   .catch((error) => console.error('MongoDB 연결 실패 : ', error))
 
+// 백엔드 서버 시작 확인
+app.listen(PORT, () => {
+  console.log(`서버가 포트 ${PORT} 에서 실행 중 입니다.`)
+}) 
+
 // API 라우팅 메소드
 
 // todo 데이터 조회
@@ -115,9 +120,4 @@ app.delete('/api/todos/:id', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: '서버오류-데이터 삭제 실패!!' })
   }
-})
-
-// 백엔드 서버 시작 확인
-app.listen(PORT, () => {
-  console.log(`서버가 포트 ${PORT} 에서 실행 중 입니다.`)
 })
