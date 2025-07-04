@@ -35,24 +35,8 @@ export default function App() {
   console.log('todos:', todos)
   const [value, setValue] = useState('')
 
-  // 🔥 상태변수 todos 변경
-  function handleChecked(id) {
-    const newtodos = todos.map((item) =>
-      item.id === id ? { ...item, checked: !item.checked } : item
-    )
-    setTodos(newtodos)
-  }
-
-  // 🔥 상태변수 todos 변경
-  // todos  할 일 객체 목록 중 삭제하기
-  function handleRemove(id) {
-    const newtodos = todos.filter((item) => item.id !== id)
-    setTodos(newtodos)
-  }
-
-  // 🔥 상태변수 todos 변경
+  // todos 에 할일 객체를 추가 => 🔥 상태변수 todos 변경
   // 🔥 화살표 함수 사용해보기
-  // todos 에 할일 객체를 추가
   const handleInsert = (text) => {
     const todo = {
       id: maxid.current,
@@ -61,6 +45,20 @@ export default function App() {
     }
     setTodos([...todos, todo])
     maxid.current += 1
+  }
+
+  // toods 의 checked 변경 => 🔥 상태변수 todos 변경
+  function handleChecked(id) {
+    const newtodos = todos.map((item) =>
+      item.id === id ? { ...item, checked: !item.checked } : item
+    )
+    setTodos(newtodos)
+  }
+
+  // todos 할 일 객체 목록 중 삭제하기 => 🔥 상태변수 todos 변경
+  function handleRemove(id) {
+    const newtodos = todos.filter((item) => item.id !== id)
+    setTodos(newtodos)
   }
 
   return (

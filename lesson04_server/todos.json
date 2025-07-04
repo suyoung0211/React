@@ -1,0 +1,14 @@
+[
+  {
+    "_id": "68661bddd1bc7d79837bdbcb",
+    "id": 1,
+    "text": "리액트 수업 복습",
+    "checked": true
+  },
+  {
+    "_id": "68661bddd1bc7d79837bdbcc",
+    "id": 2,
+    "text": "리액트 프로젝트 기획",
+    "checked": false
+  }
+]

@@ -2,6 +2,8 @@ import express, { json } from 'express'
 import { MongoClient } from 'mongodb'
 import cors from 'cors'
 
+// nodejs 백엔드(WAS) <-> 몽고DB 서버
+
 // 웹프레임워크(서버) 실행을 위한 객체 생성
 const app = express()
 const PORT = 5000 // 클라이언트 -> nodejs 서버 연결 포트
@@ -30,6 +32,8 @@ MongoClient.connect(MONGODB_URI)
   .catch((error) => console.error('MongoDB 연결 실패 : ', error))
 
 // API 라우팅 메소드
+
+// todo 데이터 조회
 app.get('/api/todos', async (req, res) => {
   // 처리할 url : /api/todos
   // 콜백함수 인자 req는 요청, res는 응답 정보 저장 객체
@@ -113,7 +117,7 @@ app.delete('/api/todos/:id', async (req, res) => {
   }
 })
 
-// 백엔드 서버 시작
+// 백엔드 서버 시작 확인
 app.listen(PORT, () => {
   console.log(`서버가 포트 ${PORT} 에서 실행 중 입니다.`)
 })
