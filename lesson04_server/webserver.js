@@ -1,11 +1,12 @@
+// Day4_03 🌟nodejs 백엔드(WAS) <-> 몽고DB 서버
+//  ㄴ 프론트엔드(react) 구현 : lesson04 프로젝트 App.jsx
+
 import express, { json } from 'express'
 import { MongoClient } from 'mongodb'
 import cors from 'cors'
 
-// nodejs 백엔드(WAS) <-> 몽고DB 서버
-
 // 웹프레임워크(서버) 실행을 위한 객체 생성
-const app = express()
+const app = express() // get, post, put, patch, delete 요청을 처리하는 메소드를 제공
 const PORT = 5000 // 클라이언트 -> nodejs 서버 연결 포트
 
 app.use(cors()) // 프론트엔드에서 백엔드로 접속하는데 필요
@@ -17,7 +18,7 @@ const DB_NAME = 'react01'
 const COLLECTION_NAME = 'lesson04'
 
 // db 연결 : nodejs 서버(백엔드) -> db 로 연결
-// 백엔듣 처리 공통 사항
+// 백엔드 처리 공통 사항
 // req.body 는 백엔드가 요청으로 받은 데이터
 // res.json({데이터}) 는 백엔드가 클라이언트에게 보내는 응답데이터
 // res.status(응답상태코드) 처리결과 값

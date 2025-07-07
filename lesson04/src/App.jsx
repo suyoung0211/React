@@ -77,7 +77,9 @@ export default function App() {
       newChecked
       const options = {
         method: 'PUT',
+        // 서버로 전송하는 데이터 유형이 json
         headers: { 'Content-Type': 'application/json' },
+        // JS 객체를 json 문자열로 변환하여 전송
         body: JSON.stringify({ checked: newChecked })
       }
 
