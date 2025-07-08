@@ -17,39 +17,6 @@ export default function SandBox(props) {
   const [box, SetBox] = useState(document.getElementById('box'))
   const [parent, SetParent] = useState(document.getElementById('main'))
 
-  // 현재 박스의 너비, 높이 크기를 변경하기
-  useEffect(() => {
-    container.addEventListener('click', function (event) {
-      if (event.target.tagName === 'BUTTON') {
-        console.log(event.target.id)
-        // 이벤트를 발생시킨 요소(target)의 id 속성값
-        // container.addEventListener('click', (event) => {
-        // console.log(event.target.id);}
-      }
-
-      // 함수 실행할때마다,현재 박스의 너비/높이 크기를 저장하기
-      const [currentWidth, setCurrentWidth] = useState(box.offsetWidth)
-      const [currentHeight, setCurrentHeight] = useState(box.offsetHeight)
-      // 크기는 10px 만큼 변경하기
-
-      if (event.target.id === 'top') {
-        console.log('박스가 작아집니다.(높이)')
-        box.style.height = setCurrentHeight - 10 + 'px'
-      }
-      // 앞의 조건 event.target.id === 'top' 거짓일 때, 다른 조건을 다시 검사
-      else if (event.target.id === 'down') {
-        console.log('박스가 커집니다.(높이)')
-        box.style.height = setCurrentHeight + 10 + 'px'
-      } else if (event.target.id === 'left') {
-        console.log('박스가 작아집니다.(너비)')
-        box.style.width = setCurrentWidth - 10 + 'px'
-      } else if (event.target.id === 'right') {
-        console.log('박스가 커집니다.(너비)')
-        box.style.width = setCurrentWidth + 10 + 'px'
-      }
-    })
-  })
-
   // 현재 박스의 위치 변경하기
   useEffect(() => {
     document.body.addEventListener('keydown', (e) => {
