@@ -1,50 +1,114 @@
-import { useState } from "react"
-import SandBox from "./component/SandBox"
+// GPT 사용해서 코딩
+// 비교용
 
-// 외부에서 사용할 컴포넌트
-export default function Box() {
-  // 박스의 크기 상태 관리
-  const [boxwidth, setWidth] = useState(100)
-  const [boxheight, setHeight] = useState(100)
-  const [posLeft, setLeft] = useState(300)
-  const [posTop, setTop] = useState(300)
+import React, { useEffect, useRef, useState } from 'react';
+import './App.css'; // 스타일은 여기 포함했거나 인라인으로 작성 가능
 
-  // 버튼 클릭시 크기 조절 핸들러
-  const handleResize = (event) => {
-    const { id } = event.target;
-    if (id === 'width_inc') {
-      setWidth((w) => w + 10);
-    } else if (id === 'width_dec') {
-      setWidth((w) => Math.max(10, w - 10));
-    } else if (id === 'height_inc') {
-      setHeight((h) => h + 10);
-    } else if (id === 'height_dec') {
-      setHeight((h) => Math.max(10, h - 10));
-    }
-  }
+function App() {
+  const boxRef = useRef(null);
+  const mainRef = useRef(null);
+
+  const [boxStyle, setBoxStyle] = useState({
+    top: 0,
+    left: 0,
+    width: 150,
+    height: 150,
+  });
+
+  // 방향키 이동
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!mainRef.current || !boxRef.current) return;
+
+      const parentWidth = mainRef.current.offsetWidth;
+      const parentHeight = mainRef.current.offsetHeight;
+
+      let { top, left, width, height } = boxStyle;
+
+      switch (e.key) {
+        case 'ArrowUp':
+          if (top - 10 > 0) setBoxStyle((prev) => ({ ...prev, top: prev.top - 10 }));
+          break;
+        case 'ArrowDown':
+          if (top + height + 10 < parentHeight)
+            setBoxStyle((prev) => ({ ...prev, top: prev.top + 10 }));
+          break;
+        case 'ArrowLeft':
+          if (left - 10 > 0) setBoxStyle((prev) => ({ ...prev, left: prev.left - 10 }));
+          break;
+        case 'ArrowRight':
+          if (left + width + 10 < parentWidth)
+            setBoxStyle((prev) => ({ ...prev, left: prev.left + 10 }));
+          break;
+        default:
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [boxStyle]);
+
+  // 버튼 클릭 시 크기 조정
+  const handleResize = (direction) => {
+    setBoxStyle((prev) => {
+      let { width, height } = prev;
+
+      switch (direction) {
+        case 'top':
+          return { ...prev, height: Math.max(height - 10, 10) };
+        case 'down':
+          return { ...prev, height: height + 10 };
+        case 'left':
+          return { ...prev, width: Math.max(width - 10, 10) };
+        case 'right':
+          return { ...prev, width: width + 10 };
+        default:
+          return prev;
+      }
+    });
+  };
+
   return (
-    <>
-      <button onClick={handleResize} id='width_inc'>
-        가로+
-      </button>
-      <button onClick={handleResize} id='width_dec'>
-        가로-
-      </button>
-      <button onClick={handleResize} id='height_inc'>
-        세로+
-      </button>
-      <button onClick={handleResize} id='height_dec'>
-        세로-
-      </button>
-      <hr />
-      <div id='container'>
-        {/* SandBox 렌더링 하기 위해 너비, 높이를 전달해 줍니다. */}
-        <SandBox />
+    <div id="container" style={{ padding: 0, margin: 0 }}>
+      <div className="nav" style={styles.nav}>
+        <button onClick={() => handleResize('top')}>👆</button>
+        <button onClick={() => handleResize('right')}>👉</button>
+        <button onClick={() => handleResize('down')}>👇</button>
+        <button onClick={() => handleResize('left')}>👈</button>
       </div>
-    </>
-  )
+
+      <div className="main" style={styles.main} ref={mainRef}>
+        <div
+          ref={boxRef}
+          style={{
+            position: 'absolute',
+            backgroundColor: 'cadetblue',
+            ...boxStyle,
+          }}
+        ></div>
+      </div>
+    </div>
+  );
 }
-      <div id='container'>
-        {/* SandBox 렌더링 하기 위해 너비, 높이를 전달해 줍니다. */}
-        <SandBox width={boxwidth} height={boxheight} />
-      </div>
+
+const styles = {
+  nav: {
+    height: 100,
+    backgroundColor: 'aquamarine',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 10,
+  },
+  main: {
+    height: 'calc(100vh - 100px)',
+    backgroundColor: 'antiquewhite',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
+  },
+};
+
+export default App;

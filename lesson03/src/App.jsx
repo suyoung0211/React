@@ -61,9 +61,16 @@ export default function App() {
     setTodos(newtodos)
   }
 
+  const [today, setToday] = useState()
+
+  const handleInputValue = (event) => {
+    setToday(event.target.value)
+  }
+
   return (
     <div>
       <TodoTemplate>
+        <h2>{today}</h2>
         {/* TodoInsert, TodoList 컴포넌트
         => TotoTemplate 컴포넌트의 children 속성으로 사용할 수 있습니다. */}
         {/* 속성이름은 개발자가 정합니다. 속성의 값은 정의된 것으로 해야합니다. */}
@@ -73,8 +80,10 @@ export default function App() {
           onRemove={handleRemove}
           onChecked={handleChecked}
         />
+        <hr />
+        <input type='date' value={today} onChange={handleInputValue} />
       </TodoTemplate>
-      <div> 렌더링 카운트 : {renderCount.current}</div>
+      {/* <div> 렌더링 카운트 : {renderCount.current}</div> */}
     </div>
   )
 }
